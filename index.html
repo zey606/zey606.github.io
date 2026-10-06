@@ -4,15 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Zeynep Özen | Portföy</title>
-    <!-- Modern Tasarım ve İkonlar -->
+    
+    <!-- Modern Fontlar, Bootstrap ve İkonlar -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Daktilo Efekti İçin Kütüphane -->
+    <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+
     <style>
-        /* Renk Değişkenleri (Karanlık ve Aydınlık Tema İçin) */
         :root {
             --bg-color: #0d1117;
             --text-color: #c9d1d9;
-            --hero-bg: linear-gradient(135deg, #1f6f8b, #1c2b42);
+            --nav-bg: rgba(13, 17, 23, 0.95);
             --card-bg: #161b22;
             --card-border: #30363d;
             --primary-color: #58a6ff;
@@ -20,11 +25,10 @@
             --text-secondary: #8b949e;
         }
         
-        /* Aydınlık Tema Aktif Olduğunda Değişecek Renkler */
         body.light-mode {
             --bg-color: #f6f8fa;
             --text-color: #24292f;
-            --hero-bg: linear-gradient(135deg, #0969da, #033d8b);
+            --nav-bg: rgba(255, 255, 255, 0.95);
             --card-bg: #ffffff;
             --card-border: #d0d7de;
             --primary-color: #0969da;
@@ -32,210 +36,287 @@
             --text-secondary: #57606a;
         }
 
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 80px; /* Menünün başlıkları kapatmaması için */
+        }
+
         body {
             background-color: var(--bg-color);
             color: var(--text-color);
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Inter', sans-serif;
             transition: background-color 0.4s ease, color 0.4s ease;
         }
+
+        /* Sabit Üst Menü */
+        .navbar {
+            background-color: var(--nav-bg);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--card-border);
+            transition: background-color 0.4s ease;
+        }
+        .nav-link { color: var(--text-color) !important; font-weight: 500; transition: color 0.3s; }
+        .nav-link:hover { color: var(--primary-color) !important; }
+
+        /* Giriş (Hero) Bölümü */
         .hero-section {
-            padding: 100px 0;
-            text-align: center;
-            background: var(--hero-bg);
-            border-bottom: 3px solid var(--primary-color);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 60px;
+        }
+        .hero-title { font-size: 3.5rem; font-weight: 700; margin-bottom: 15px; }
+        .hero-subtitle { font-size: 1.5rem; font-weight: 300; color: var(--text-secondary); margin-bottom: 30px; }
+        .typed-text { color: var(--primary-color); font-weight: 600; }
+        
+        /* Profil Fotoğrafı Stili */
+        .profile-img-container {
             position: relative;
+            width: 300px;
+            height: 300px;
+            margin: 0 auto;
         }
-        .hero-section h1 {
-            color: #ffffff;
-            font-weight: 700;
-            font-size: 3rem;
-            margin-bottom: 10px;
+        .profile-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%; /* Tam yuvarlak yapar */
+            border: 4px solid var(--card-border);
+            box-shadow: 0 10px 30px var(--hover-shadow);
+            transition: transform 0.3s, border-color 0.3s;
         }
+        .profile-img:hover {
+            transform: scale(1.05);
+            border-color: var(--primary-color);
+        }
+
+        /* Sosyal İkonlar */
         .social-icons a {
-            color: #ffffff;
-            font-size: 1.5rem;
-            margin: 0 10px;
-            transition: color 0.3s ease;
+            color: var(--text-color);
+            font-size: 1.8rem;
+            margin-right: 20px;
+            transition: color 0.3s, transform 0.3s;
+            display: inline-block;
         }
         .social-icons a:hover {
             color: var(--primary-color);
+            transform: translateY(-5px);
         }
+
+        /* Ortak Bölüm Stilleri */
+        section { padding: 80px 0; }
         .section-title {
-            color: var(--primary-color);
-            margin-bottom: 30px;
-            font-weight: 600;
-            border-bottom: 1px solid var(--card-border);
-            padding-bottom: 10px;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 40px;
+            position: relative;
+            display: inline-block;
         }
-        .project-card {
+        .section-title::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -10px;
+            width: 50%;
+            height: 3px;
+            background-color: var(--primary-color);
+        }
+
+        /* Kartlar (Deneyim ve Projeler) */
+        .custom-card {
             background-color: var(--card-bg);
             border: 1px solid var(--card-border);
-            border-radius: 10px;
-            padding: 20px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            height: 100%;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 25px;
+            transition: transform 0.3s, box-shadow 0.3s;
         }
-        .project-card:hover {
+        .custom-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 10px 20px var(--hover-shadow);
             border-color: var(--primary-color);
         }
-        .skill-name { font-size: 0.9rem; font-weight: bold; margin-top: 10px; }
-        .progress { background-color: var(--card-border); height: 10px; }
-        .progress-bar { background-color: var(--primary-color); }
         .text-secondary { color: var(--text-secondary) !important; }
-
-        /* Kontrol Paneli Butonları */
-        .control-panel {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            display: flex;
-            gap: 10px;
-        }
+        
+        /* Butonlar */
         .btn-custom {
-            background: rgba(255, 255, 255, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.4);
-            color: white;
-            padding: 8px 15px;
+            background-color: transparent;
+            border: 1px solid var(--text-color);
+            color: var(--text-color);
             border-radius: 20px;
-            cursor: pointer;
-            backdrop-filter: blur(5px);
-            transition: background 0.3s, transform 0.2s;
+            transition: all 0.3s;
         }
         .btn-custom:hover {
-            background: rgba(255, 255, 255, 0.4);
-            transform: scale(1.05);
+            background-color: var(--text-color);
+            color: var(--bg-color);
         }
+        .btn-primary-custom {
+            background-color: var(--primary-color);
+            border: none;
+            color: white;
+            padding: 10px 25px;
+            border-radius: 30px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+        .btn-primary-custom:hover { background-color: #3b82f6; color: white; }
     </style>
 </head>
 <body>
 
-    <!-- Üst Kısım -->
-    <header class="hero-section">
-        <!-- Ayar Butonları -->
-        <div class="control-panel">
-            <button class="btn-custom" id="langToggle" onclick="toggleLanguage()" title="Dili Değiştir">
-                <i class="fas fa-globe"></i> <span id="langText">EN</span>
-            </button>
-            <button class="btn-custom" id="themeToggle" onclick="toggleTheme()" title="Temayı Değiştir">
-                <i class="fas fa-sun"></i>
-            </button>
-        </div>
-        
+    <!-- Üst Menü -->
+    <nav class="navbar navbar-expand-lg fixed-top">
         <div class="container">
-          <div class="container">
-            <!-- Profil Fotoğrafı -->
-            <img src="profil.jpeg" alt="Zeynep Özen" width="150" height="150" style="border-radius: 50%; object-fit: cover; margin-bottom: 20px; border: 3px solid var(--primary-color);">
+            <a class="navbar-brand fw-bold" style="color: var(--text-color);" href="#home">Z.Ö.</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <i class="fas fa-bars" style="color: var(--text-color);"></i>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav align-items-center">
+                    <li class="nav-item"><a class="nav-link" href="#home" data-tr="Anasayfa" data-en="Home" data-es="Inicio" data-de="Startseite">Anasayfa</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about" data-tr="Hakkımda" data-en="About" data-es="Sobre mí" data-de="Über mich">Hakkımda</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#experience" data-tr="Deneyim" data-en="Experience" data-es="Experiencia" data-de="Erfahrung">Deneyim</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#projects" data-tr="Projeler" data-en="Projects" data-es="Proyectos" data-de="Projekte">Projeler</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#resume" data-tr="Özgeçmiş" data-en="Resume" data-es="CV" data-de="Lebenslauf">Özgeçmiş</a></li>
+                    
+                    <!-- Ayar Butonları -->
+                    <li class="nav-item ms-3">
+                        <button class="btn btn-sm btn-custom me-2" onclick="toggleLanguage()" id="langBtn">EN</button>
+                        <button class="btn btn-sm btn-custom" onclick="toggleTheme()"><i class="fas fa-sun" id="themeIcon"></i></button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Ana Giriş (Hero) -->
+    <section id="home" class="hero-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-7 order-2 order-lg-1 mt-5 mt-lg-0">
+                    <h1 class="hero-title">
+                        <span data-tr="Merhaba, ben Zeynep." data-en="Hi, I'm Zeynep." data-es="Hola, soy Zeynep." data-de="Hallo, ich bin Zeynep.">Merhaba, ben Zeynep.</span>
+                    </h1>
+                    <div class="hero-subtitle">
+                        <span data-tr="Ben bir" data-en="I am a" data-es="Soy" data-de="Ich bin">Ben bir</span> 
+                        <span class="typed-text" id="typed-text"></span>
+                    </div>
+                    
+                    <p class="mb-4 text-secondary w-75" data-tr="Robotik, otonom sistemler ve PCB tasarımı üzerine çalışan Elektrik-Elektronik Mühendisliği öğrencisiyim." data-en="Electrical-Electronics Engineering student working on robotics, autonomous systems, and PCB design." data-es="Estudiante de Ingeniería Eléctrica-Electrónica trabajando en robótica, sistemas autónomos y diseño de PCB." data-de="Studentin der Elektrotechnik-Elektronik mit Schwerpunkt Robotik, autonome Systeme und PCB-Design.">
+                        Robotik, otonom sistemler ve PCB tasarımı üzerine çalışan Elektrik-Elektronik Mühendisliği öğrencisiyim.
+                    </p>
+
+                    <div class="social-icons">
+                        <a href="https://github.com/zey606" target="_blank" rel="noopener"><i class="fab fa-github"></i></a>
+                        <a href="https://www.linkedin.com/in/zeynep-ozen34707/" target="_blank" rel="noopener"><i class="fab fa-linkedin"></i></a>
+                        <a href="mailto:ozenzeynep244@gmail.com"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-5 order-1 order-lg-2 text-center">
+                    <div class="profile-img-container">
+                        <!-- Profil Fotoğrafı (Tam olarak profil.jpeg okunacak) -->
+                        <img src="profil.jpeg" alt="Zeynep Özen" class="profile-img">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hakkımda -->
+    <section id="about">
+        <div class="container">
+            <h2 class="section-title" data-tr="Hakkımda" data-en="About Me" data-es="Sobre mí" data-de="Über mich">Hakkımda</h2>
+            <div class="row">
+                <div class="col-lg-8">
+                    <p class="fs-5" data-tr="İstanbul Sabahattin Zaim Üniversitesi'nde Elektrik-Elektronik Mühendisliği okuyorum. Aynı zamanda Yönetim Bilişim Sistemleri eğitimime devam ediyorum. Donanım ve yazılımı birleştirerek gerçek dünya problemlerine çözümler üretmeyi seviyorum." data-en="I study Electrical-Electronics Engineering at Istanbul Sabahattin Zaim University while also pursuing a degree in MIS. I love combining hardware and software to solve real-world problems." data-es="Estudio Ingeniería Eléctrica-Electrónica en la Universidad Sabahattin Zaim de Estambul y también curso SIG. Me encanta combinar hardware y software para resolver problemas reales." data-de="Ich studiere Elektrotechnik-Elektronik an der Sabahattin Zaim Universität in Istanbul und absolviere gleichzeitig ein Studium in Wirtschaftsinformatik. Ich liebe es, Hardware und Software zu kombinieren.">
+                        İstanbul Sabahattin Zaim Üniversitesi'nde Elektrik-Elektronik Mühendisliği okuyorum. Aynı zamanda Yönetim Bilişim Sistemleri eğitimime devam ediyorum. Donanım ve yazılımı birleştirerek gerçek dünya problemlerine çözümler üretmeyi seviyorum.
+                    </p>
+                </div>
+                <div class="col-lg-4 mt-4 mt-lg-0">
+                    <h5 data-tr="Yetenekler" data-en="Skills" data-es="Habilidades" data-de="Fähigkeiten">Yetenekler</h5>
+                    <div>
+                        <span class="badge bg-secondary mb-2 p-2">ROS 2</span>
+                        <span class="badge bg-secondary mb-2 p-2">C/C++</span>
+                        <span class="badge bg-secondary mb-2 p-2">Python</span>
+                        <span class="badge bg-secondary mb-2 p-2">KiCad / Altium</span>
+                        <span class="badge bg-secondary mb-2 p-2">LaTeX</span>
+                        <span class="badge bg-secondary mb-2 p-2">Linux</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Deneyim (İş) -->
+    <section id="experience">
+        <div class="container">
+            <h2 class="section-title" data-tr="Deneyim" data-en="Experience" data-es="Experiencia" data-de="Erfahrung">Deneyim</h2>
             
-            <h1>Zeynep Özen</h1>
-            <p class="lead text-light mb-4" 
-               data-tr="Elektrik-Elektronik Mühendisliği & Yönetim Bilişim Sistemleri" 
-               data-en="Electrical-Electronics Engineering & MIS" 
-               data-es="Ingeniería Eléctrica-Electrónica y SIG"
-               data-de="Elektrotechnik-Elektronik & Wirtschaftsinformatik">
-               Elektrik-Elektronik Mühendisliği & Yönetim Bilişim Sistemleri
+            <div class="custom-card">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <h4 class="mb-0 text-primary">T3 Gemstone</h4>
+                    <span class="text-secondary" data-tr="Mayıs 2026 - Devam Ediyor" data-en="May 2026 - Present" data-es="Mayo 2026 - Presente" data-de="Mai 2026 - Heute">Mayıs 2026 - Devam Ediyor</span>
+                </div>
+                <h6 class="text-secondary" data-tr="Gömülü Yazılım Stajyeri" data-en="Embedded Software Intern" data-es="Pasante de Software Integrado" data-de="Praktikantin für Embedded Software">Gömülü Yazılım Stajyeri</h6>
+                <p class="mt-3 mb-0" data-tr="Buildroot ve ROS 2 mimarileri üzerine otonom sistem geliştirmeleri." data-en="Autonomous system development based on Buildroot and ROS 2 architectures." data-es="Desarrollo de sistemas autónomos basados en arquitecturas Buildroot y ROS 2." data-de="Entwicklung autonomer Systeme basierend auf Buildroot- und ROS 2-Architekturen.">Buildroot ve ROS 2 mimarileri üzerine otonom sistem geliştirmeleri.</p>
+            </div>
+
+            <div class="custom-card">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <h4 class="mb-0 text-primary">İZÜ NAR</h4>
+                    <span class="text-secondary" data-tr="Temmuz 2025 - Devam Ediyor" data-en="July 2025 - Present" data-es="Julio 2025 - Presente" data-de="Juli 2025 - Heute">Temmuz 2025 - Devam Ediyor</span>
+                </div>
+                <h6 class="text-secondary" data-tr="Yarı Zamanlı Araştırmacı" data-en="Part-Time Researcher" data-es="Investigadora a tiempo parcial" data-de="Teilzeit-Forscherin">Yarı Zamanlı Araştırmacı</h6>
+                <p class="mt-3 mb-0" data-tr="Nükleer algılayıcılar ve robotik uygulama araştırma merkezinde mühendislik projeleri yönetimi." data-en="Engineering projects management at the nuclear sensors and robotics application research center." data-es="Gestión de proyectos de ingeniería en el centro de investigación de aplicaciones de sensores nucleares y robótica." data-de="Leitung von Ingenieurprojekten im Forschungszentrum für Nuklearsensoren und Robotikanwendungen.">Nükleer algılayıcılar ve robotik uygulama araştırma merkezinde mühendislik projeleri yönetimi.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projeler -->
+    <section id="projects">
+        <div class="container">
+            <h2 class="section-title" data-tr="Projeler" data-en="Projects" data-es="Proyectos" data-de="Projekte">Projeler</h2>
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <div class="custom-card h-100">
+                        <h4 class="text-primary">TÜBİTAK 2209-A</h4>
+                        <p class="text-secondary mb-3" data-tr="Görüntü İşleme ve Toprak Analizi" data-en="Image Processing & Soil Analysis" data-es="Procesamiento de Imágenes y Análisis" data-de="Bildverarbeitung & Bodenanalyse">Görüntü İşleme ve Toprak Analizi</p>
+                        <p data-tr="Gerçek zamanlı toprak verimliliği analizi ve bitki sağlığı tespiti yapan donanım/yazılım entegre sistem." data-en="Hardware/software integrated system performing real-time soil fertility analysis and plant health detection." data-es="Sistema integrado de hardware/software que realiza análisis de fertilidad del suelo en tiempo real." data-de="Integriertes Hardware-/Software-System zur Durchführung von Echtzeit-Bodenfruchtbarkeitsanalysen.">Gerçek zamanlı toprak verimliliği analizi ve bitki sağlığı tespiti yapan donanım/yazılım entegre sistem.</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="custom-card h-100">
+                        <h4 class="text-primary">İZÜ Tahtelbahir</h4>
+                        <p class="text-secondary mb-3" data-tr="Otonom Su Altı Aracı" data-en="Autonomous Underwater Vehicle" data-es="Vehículo Submarino Autónomo" data-de="Autonomes Unterwasserfahrzeug">Otonom Su Altı Aracı</p>
+                        <p data-tr="TEKNOFEST İnsansız Su Altı Sistemleri yarışması için mekanik, elektronik ve yazılım sistemlerinin tasarımı ve takım kaptanlığı." data-en="Design of mechanical, electronic and software systems for the TEKNOFEST Unmanned Underwater Systems competition." data-es="Diseño de sistemas mecánicos, electrónicos y de software para la competencia TEKNOFEST." data-de="Entwurf von mechanischen, elektronischen und Softwaresystemen für den TEKNOFEST-Wettbewerb.">TEKNOFEST İnsansız Su Altı Sistemleri yarışması için mekanik, elektronik ve yazılım sistemlerinin tasarımı ve takım kaptanlığı.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Özgeçmiş (CV) -->
+    <section id="resume">
+        <div class="container text-center">
+            <h2 class="section-title" data-tr="Özgeçmiş" data-en="Resume" data-es="Currículum" data-de="Lebenslauf">Özgeçmiş</h2>
+            <p class="mt-4 mb-5 text-secondary fs-5" data-tr="Deneyimlerimin ve projelerimin tüm detaylarını içeren kapsamlı PDF özgeçmişimi aşağıdan inceleyebilirsiniz." data-en="You can review my comprehensive PDF resume containing all details of my experience and projects below." data-es="Puede revisar mi currículum completo en PDF que contiene todos los detalles de mi experiencia a continuación." data-de="Nachfolgend können Sie meinen umfassenden PDF-Lebenslauf mit allen Details zu meiner Erfahrung einsehen.">
+                Deneyimlerimin ve projelerimin tüm detaylarını içeren kapsamlı PDF özgeçmişimi aşağıdan inceleyebilirsiniz.
             </p>
-            <div class="social-icons">
-                <a href="https://github.com/zey606" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
-                <a href="https://www.linkedin.com/in/LINKEDIN-KULLANICI-ADIN" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin"></i></a>
-                <a href="mailto:senin-mail-adresin@gmail.com"><i class="fas fa-envelope"></i></a>
-            </div>
+            <a href="cv.pdf" target="_blank" class="btn-primary-custom px-5 py-3">
+                <i class="fas fa-file-pdf me-2"></i> 
+                <span data-tr="Özgeçmişimi İndir" data-en="Download Resume" data-es="Descargar CV" data-de="Lebenslauf Herunterladen">Özgeçmişimi İndir</span>
+            </a>
         </div>
-    </header>
+    </section>
 
-    <!-- İçerik -->
-    <div class="container my-5">
-        <div class="row mb-5">
-            <div class="col-md-6 mb-4">
-                <h3 class="section-title"><i class="fas fa-user-astronaut me-2"></i> 
-                    <span data-tr="Hakkımda" data-en="About Me" data-es="Sobre mí" data-de="Über mich">Hakkımda</span>
-                </h3>
-                <p data-tr="Robotik sistemler, otonom navigasyon (ROS 2), gömülü yazılım ve baskı devre kartı (PCB) tasarımı alanlarında aktif olarak projeler geliştiren bir mühendis adayıyım." 
-                   data-en="I am an engineering candidate actively developing projects in robotics, autonomous navigation (ROS 2), embedded software, and PCB design." 
-                   data-es="Soy una candidata de ingeniería que desarrolla activamente proyectos en robótica, navegación autónoma, software integrado y diseño de PCB."
-                   data-de="Ich bin eine angehende Ingenieurin, die aktiv Projekte in den Bereichen Robotik, autonome Navigation (ROS 2), Embedded Software und PCB-Design entwickelt.">
-                    Robotik sistemler, otonom navigasyon (ROS 2), gömülü yazılım ve baskı devre kartı (PCB) tasarımı alanlarında aktif olarak projeler geliştiren bir mühendis adayıyım.
-                </p>
-                <p><i class="fas fa-briefcase text-secondary me-2"></i> <strong>İZÜ NAR</strong> - 
-                    <span data-tr="Yarı Zamanlı Araştırmacı" data-en="Part-Time Researcher" data-es="Investigadora a tiempo parcial" data-de="Teilzeit-Forscherin">Yarı Zamanlı Araştırmacı</span>
-                </p>
-                <p><i class="fas fa-microchip text-secondary me-2"></i> <strong>T3 Gemstone</strong> - 
-                    <span data-tr="Gömülü Yazılım Stajyeri" data-en="Embedded Software Intern" data-es="Pasante de software integrado" data-de="Praktikantin für Embedded Software">Gömülü Yazılım Stajyeri</span>
-                </p>
-            </div>
-            
-            <div class="col-md-6 mb-4">
-                <h3 class="section-title"><i class="fas fa-code me-2"></i> 
-                    <span data-tr="Teknik Yetenekler" data-en="Technical Skills" data-es="Habilidades técnicas" data-de="Technische Fähigkeiten">Teknik Yetenekler</span>
-                </h3>
-                <div class="skill-name" data-tr="ROS 2 & Otonom Navigasyon" data-en="ROS 2 & Autonomous Navigation" data-es="ROS 2 y Navegación Autónoma" data-de="ROS 2 & Autonome Navigation">ROS 2 & Otonom Navigasyon</div>
-                <div class="progress"><div class="progress-bar w-75"></div></div>
-                
-                <div class="skill-name" data-tr="PCB Tasarım (KiCad, Altium)" data-en="PCB Design (KiCad, Altium)" data-es="Diseño de PCB (KiCad, Altium)" data-de="PCB-Design (KiCad, Altium)">PCB Tasarım (KiCad, Altium)</div>
-                <div class="progress"><div class="progress-bar w-85"></div></div>
-                
-                <div class="skill-name">Python, C/C++</div>
-                <div class="progress"><div class="progress-bar w-80"></div></div>
-                
-                <div class="skill-name" data-tr="LaTeX Raporlama" data-en="LaTeX Reporting" data-es="Informes en LaTeX" data-de="LaTeX-Berichterstellung">LaTeX Raporlama</div>
-                <div class="progress"><div class="progress-bar w-90"></div></div>
-            </div>
-        </div>
-
-        <h3 class="section-title"><i class="fas fa-rocket me-2"></i> 
-            <span data-tr="Öne Çıkan Projeler" data-en="Featured Projects" data-es="Proyectos destacados" data-de="Ausgewählte Projekte">Öne Çıkan Projeler</span>
-        </h3>
-        <div class="row g-4">
-            
-            <div class="col-md-6">
-                <div class="project-card">
-                    <h5 data-tr="TÜBİTAK 2209-A Projesi" data-en="TÜBİTAK 2209-A Project" data-es="Proyecto TÜBİTAK 2209-A" data-de="TÜBİTAK 2209-A Projekt">TÜBİTAK 2209-A Projesi</h5>
-                    <p class="text-secondary small" 
-                       data-tr="Gerçek Zamanlı Toprak Verimliliği Analizi" 
-                       data-en="Real-Time Soil Fertility Analysis" 
-                       data-es="Análisis de fertilidad del suelo en tiempo real"
-                       data-de="Echtzeit-Bodenfruchtbarkeitsanalyse">Gerçek Zamanlı Toprak Verimliliği Analizi</p>
-                    <p data-tr="Görüntü işleme tabanlı bitki sağlığı tespiti ve toprak analizi yapan entegre sistem." 
-                       data-en="Integrated system for image processing-based plant health detection and soil analysis." 
-                       data-es="Sistema integrado para la detección de la salud de las plantas mediante procesamiento de imágenes."
-                       data-de="Integriertes System zur bildverarbeitungsbasierten Erkennung der Pflanzengesundheit und Bodenanalyse.">
-                       Görüntü işleme tabanlı bitki sağlığı tespiti ve toprak analizi yapan entegre sistem.
-                    </p>
-                    <span class="badge bg-primary">Python</span>
-                    <span class="badge bg-primary" data-tr="Görüntü İşleme" data-en="Image Processing" data-es="Procesamiento de imágenes" data-de="Bildverarbeitung">Görüntü İşleme</span>
-                </div>
-            </div>
-
-            <div class="col-md-6">
-                <div class="project-card">
-                    <h5 data-tr="İZÜ Tahtelbahir Su Altı Aracı" data-en="İZÜ Tahtelbahir Underwater Vehicle" data-es="Vehículo submarino İZÜ Tahtelbahir" data-de="İZÜ Tahtelbahir Unterwasserfahrzeug">İZÜ Tahtelbahir Su Altı Aracı</h5>
-                    <p class="text-secondary small" 
-                       data-tr="TEKNOFEST İnsansız Su Altı Sistemleri" 
-                       data-en="TEKNOFEST Unmanned Underwater Systems" 
-                       data-es="Sistemas submarinos no tripulados TEKNOFEST"
-                       data-de="TEKNOFEST Unbemannte Unterwassersysteme">TEKNOFEST İnsansız Su Altı Sistemleri</p>
-                    <p data-tr="Otonom su altı aracının elektronik sistem tasarımı ve navigasyon algoritmaları." 
-                       data-en="Electronic system design and navigation algorithms of the autonomous underwater vehicle." 
-                       data-es="Diseño del sistema electrónico y algoritmos de navegación del vehículo submarino."
-                       data-de="Elektroniksystemdesign und Navigationsalgorithmen des autonomen Unterwasserfahrzeugs.">
-                       Otonom su altı aracının elektronik sistem tasarımı ve navigasyon algoritmaları.
-                    </p>
-                    <span class="badge bg-primary">ROS 2</span>
-                    <span class="badge bg-primary" data-tr="Gömülü Sistem" data-en="Embedded System" data-es="Sistema integrado" data-de="Eingebettetes System">Gömülü Sistem</span>
-                </div>
-            </div>
-
-        </div>
-    </div>
-
-    <!-- JavaScript (Tema ve Dil Mantığı) -->
+    <!-- Javascript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // Tema Değiştirme Fonksiyonu
+        // Tema Mantığı
         function toggleTheme() {
             const body = document.body;
-            const themeIcon = document.querySelector('#themeToggle i');
-            
+            const themeIcon = document.getElementById('themeIcon');
             body.classList.toggle('light-mode');
             
             if (body.classList.contains('light-mode')) {
@@ -245,26 +326,13 @@
             }
         }
 
-        // Dil Değiştirme Fonksiyonu
+        // Dil ve Hareketli Yazı (Typed.js) Mantığı
         const languages = ['tr', 'en', 'es', 'de'];
         const langLabels = {'tr': 'EN', 'en': 'ES', 'es': 'DE', 'de': 'TR'};
         let currentLang = 'tr';
+        let typedInstance = null;
 
-        function toggleLanguage() {
-            let currentIndex = languages.indexOf(currentLang);
-            currentLang = languages[(currentIndex + 1) % languages.length];
-            
-            document.getElementById('langText').innerText = langLabels[currentLang];
-
-            const elements = document.querySelectorAll('[data-tr]');
-            elements.forEach(el => {
-                if(el.getAttribute('data-' + currentLang)) {
-                    el.innerText = el.getAttribute('data-' + currentLang);
-                }
-            });
-        }
-    </script>
-    
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+        // Her dil için daktilo yazıları
+        const typedStrings = {
+            'tr': ['Elektrik-Elektronik Mühendisi adayıyım.', 'ROS 2 Geliştiricisiyim.', 'PCB Tasarımcısıyım.', 'Lider ve Araştırmacıyım.'],
+            'en':
