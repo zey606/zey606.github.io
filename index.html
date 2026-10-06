@@ -127,9 +127,14 @@
             <h1>Zeynep Özen</h1>
             <p class="lead text-light mb-4" data-tr="Elektrik-Elektronik Mühendisliği & Yönetim Bilişim Sistemleri" data-en="Electrical-Electronics Engineering & MIS" data-es="Ingeniería Eléctrica-Electrónica y SIG">Elektrik-Elektronik Mühendisliği & Yönetim Bilişim Sistemleri</p>
             <div class="social-icons">
-                <a href="#"><i class="fab fa-github"></i></a>
-                <a href="#"><i class="fab fa-linkedin"></i></a>
-                <a href="mailto:eposta@adresin.com"><i class="fas fa-envelope"></i></a>
+                <!-- GitHub (Yeni sekmede açılır) -->
+                <a href="https://github.com/zey606" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
+                
+                <!-- LinkedIn (Yeni sekmede açılır) -->
+                <a href="https://www.linkedin.com/in/zeynep-ozen34707/" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin"></i></a>
+                
+                <!-- E-posta (Tıklayınca mail uygulamasını açar) -->
+                <a href="mailto:ozenzeynep244@gmail.com"><i class="fas fa-envelope"></i></a>
             </div>
         </div>
     </header>
@@ -208,9 +213,9 @@
             body.classList.toggle('light-mode');
             
             if (body.classList.contains('light-mode')) {
-                themeIcon.classList.replace('fa-sun', 'fa-moon'); // Aydınlık temada ay ikonu çıkar
+                themeIcon.classList.replace('fa-sun', 'fa-moon');
             } else {
-                themeIcon.classList.replace('fa-moon', 'fa-sun'); // Karanlık temada güneş ikonu çıkar
+                themeIcon.classList.replace('fa-moon', 'fa-sun');
             }
         }
 
@@ -220,14 +225,11 @@
         let currentLang = 'tr';
 
         function toggleLanguage() {
-            // Sonraki dili belirle
             let currentIndex = languages.indexOf(currentLang);
             currentLang = languages[(currentIndex + 1) % languages.length];
             
-            // Buton üzerindeki yazıyı güncelle
             document.getElementById('langText').innerText = langLabels[currentLang];
 
-            // Çevrilecek tüm metinleri bul ve güncelle
             const elements = document.querySelectorAll('[data-tr]');
             elements.forEach(el => {
                 if(el.getAttribute('data-' + currentLang)) {
