@@ -65,8 +65,10 @@
             align-items: center;
             padding-top: 60px;
         }
-        .hero-title { font-size: 3.5rem; font-weight: 700; margin-bottom: 15px; }
-        .hero-subtitle { font-size: 1.5rem; font-weight: 300; color: var(--text-secondary); margin-bottom: 30px; }
+        .hero-title { font-size: 3.5rem; font-weight: 700; margin-bottom: 10px; }
+        
+        /* Daktilo Yazısı Büyütüldü */
+        .hero-subtitle { font-size: 2.2rem; font-weight: 400; color: var(--text-secondary); margin-bottom: 30px; }
         .typed-text { color: var(--primary-color); font-weight: 600; }
         
         /* Profil Fotoğrafı Stili */
@@ -170,7 +172,7 @@
     <nav class="navbar navbar-expand-lg fixed-top">
         <div class="container">
             
-            <!-- Z.Ö. Yerine Gelen Ayar Butonları -->
+            <!-- Ayar Butonları -->
             <div class="d-flex align-items-center">
                 <button class="btn btn-sm btn-custom me-2" onclick="toggleLanguage()" id="langBtn" title="Dili Değiştir">🇬🇧 EN</button>
                 <button class="btn btn-sm btn-custom" onclick="toggleTheme()" title="Temayı Değiştir"><i class="fas fa-sun" id="themeIcon"></i></button>
@@ -199,12 +201,14 @@
                 <div class="col-lg-7 order-2 order-lg-1 mt-5 mt-lg-0">
                     <h1 class="hero-title">
                         <span data-tr="Merhaba, ben Zeynep Özen." data-en="Hi, I'm Zeynep Özen." data-es="Hola, soy Zeynep Özen." data-de="Hallo, ich bin Zeynep Özen.">Merhaba, ben Zeynep Özen.</span>
+                    </h1>
                     <div class="hero-subtitle">
                         <span data-tr="Ben bir" data-en="I am a" data-es="Soy" data-de="Ich bin">Ben bir</span> 
                         <span class="typed-text" id="typed-text"></span>
                     </div>
                     
-                    <p class="mb-4 text-secondary w-75" data-tr="Robotik, otonom sistemler ve PCB tasarımı üzerine çalışan Elektrik-Elektronik Mühendisliği öğrencisiyim." data-en="Electrical-Electronics Engineering student working on robotics, autonomous systems, and PCB design." data-es="Estudiante de Ingeniería Eléctrica-Electrónica trabajando en robótica, sistemas autónomos y diseño de PCB." data-de="Studentin der Elektrotechnik-Elektronik mit Schwerpunkt Robotik, autonome Systeme und PCB-Design.">
+                    <!-- Gri Yazı Küçültüldü (fs-5) -->
+                    <p class="mb-4 text-secondary w-75 fs-5" data-tr="Robotik, otonom sistemler ve PCB tasarımı üzerine çalışan Elektrik-Elektronik Mühendisliği öğrencisiyim." data-en="Electrical-Electronics Engineering student working on robotics, autonomous systems, and PCB design." data-es="Estudiante de Ingeniería Eléctrica-Electrónica trabajando en robótica, sistemas autónomos y diseño de PCB." data-de="Studentin der Elektrotechnik-Elektronik mit Schwerpunkt Robotik, autonome Systeme und PCB-Design.">
                         Robotik, otonom sistemler ve PCB tasarımı üzerine çalışan Elektrik-Elektronik Mühendisliği öğrencisiyim.
                     </p>
 
