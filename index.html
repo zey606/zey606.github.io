@@ -67,7 +67,7 @@
         }
         .hero-title { font-size: 3.5rem; font-weight: 700; margin-bottom: 10px; }
         
-        /* Daktilo Yazısı Büyütüldü */
+        /* Daktilo Yazısı */
         .hero-subtitle { font-size: 2.2rem; font-weight: 400; color: var(--text-secondary); margin-bottom: 30px; }
         .typed-text { color: var(--primary-color); font-weight: 600; }
         
@@ -124,7 +124,7 @@
             background-color: var(--primary-color);
         }
 
-        /* Kartlar */
+        /* Kartlar ve Logo Stilleri */
         .custom-card {
             background-color: var(--card-bg);
             border: 1px solid var(--card-border);
@@ -139,6 +139,17 @@
             border-color: var(--primary-color);
         }
         .text-secondary { color: var(--text-secondary) !important; }
+        
+        .edu-logo {
+            width: 70px;
+            height: 70px;
+            object-fit: contain;
+            background-color: #ffffff;
+            border-radius: 8px;
+            padding: 8px;
+            border: 1px solid var(--card-border);
+            flex-shrink: 0;
+        }
         
         /* Butonlar */
         .btn-custom {
@@ -172,7 +183,6 @@
     <nav class="navbar navbar-expand-lg fixed-top">
         <div class="container">
             
-            <!-- Ayar Butonları -->
             <div class="d-flex align-items-center">
                 <button class="btn btn-sm btn-custom me-2" onclick="toggleLanguage()" id="langBtn" title="Dili Değiştir">🇬🇧 EN</button>
                 <button class="btn btn-sm btn-custom" onclick="toggleTheme()" title="Temayı Değiştir"><i class="fas fa-sun" id="themeIcon"></i></button>
@@ -186,6 +196,7 @@
                 <ul class="navbar-nav align-items-center">
                     <li class="nav-item"><a class="nav-link" href="#home" data-tr="Anasayfa" data-en="Home" data-es="Inicio" data-de="Startseite">Anasayfa</a></li>
                     <li class="nav-item"><a class="nav-link" href="#about" data-tr="Hakkımda" data-en="About" data-es="Sobre mí" data-de="Über mich">Hakkımda</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#education" data-tr="Eğitim" data-en="Education" data-es="Educación" data-de="Ausbildung">Eğitim</a></li>
                     <li class="nav-item"><a class="nav-link" href="#experience" data-tr="Deneyim" data-en="Experience" data-es="Experiencia" data-de="Erfahrung">Deneyim</a></li>
                     <li class="nav-item"><a class="nav-link" href="#projects" data-tr="Projeler" data-en="Projects" data-es="Proyectos" data-de="Projekte">Projeler</a></li>
                     <li class="nav-item"><a class="nav-link" href="#resume" data-tr="Özgeçmiş" data-en="Resume" data-es="CV" data-de="Lebenslauf">Özgeçmiş</a></li>
@@ -207,7 +218,6 @@
                         <span class="typed-text" id="typed-text"></span>
                     </div>
                     
-                    <!-- Gri Yazı Küçültüldü (fs-5) -->
                     <p class="mb-4 text-secondary w-75 fs-5" data-tr="Robotik, otonom sistemler ve PCB tasarımı üzerine çalışan Elektrik-Elektronik Mühendisliği öğrencisiyim." data-en="Electrical-Electronics Engineering student working on robotics, autonomous systems, and PCB design." data-es="Estudiante de Ingeniería Eléctrica-Electrónica trabajando en robótica, sistemas autónomos y diseño de PCB." data-de="Studentin der Elektrotechnik-Elektronik mit Schwerpunkt Robotik, autonome Systeme und PCB-Design.">
                         Robotik, otonom sistemler ve PCB tasarımı üzerine çalışan Elektrik-Elektronik Mühendisliği öğrencisiyim.
                     </p>
@@ -247,6 +257,35 @@
                         <span class="badge bg-secondary mb-2 p-2">LaTeX</span>
                         <span class="badge bg-secondary mb-2 p-2">Linux</span>
                     </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Eğitim Bölümü -->
+    <section id="education">
+        <div class="container">
+            <h2 class="section-title" data-tr="Eğitim" data-en="Education" data-es="Educación" data-de="Ausbildung">Eğitim</h2>
+            
+            <div class="custom-card d-flex flex-column flex-md-row align-items-md-center gap-3">
+                <img src="izu-logo.png" alt="İZÜ Logo" class="edu-logo">
+                <div class="flex-grow-1">
+                    <div class="d-flex flex-column flex-md-row justify-content-md-between align-items-md-center mb-2">
+                        <h4 class="mb-1 mb-md-0 text-primary">İstanbul Sabahattin Zaim Üniversitesi</h4>
+                        <span class="text-secondary" data-tr="Devam Ediyor" data-en="Present" data-es="Presente" data-de="Heute">Devam Ediyor</span>
+                    </div>
+                    <h6 class="text-secondary mb-0" data-tr="Lisans, Elektrik-Elektronik Mühendisliği" data-en="Bachelor's, Electrical-Electronics Engineering" data-es="Licenciatura, Ingeniería Eléctrica-Electrónica" data-de="Bachelor, Elektrotechnik-Elektronik">Lisans, Elektrik-Elektronik Mühendisliği</h6>
+                </div>
+            </div>
+
+            <div class="custom-card d-flex flex-column flex-md-row align-items-md-center gap-3">
+                <img src="iu-logo.png" alt="İÜ Logo" class="edu-logo">
+                <div class="flex-grow-1">
+                    <div class="d-flex flex-column flex-md-row justify-content-md-between align-items-md-center mb-2">
+                        <h4 class="mb-1 mb-md-0 text-primary">İstanbul Üniversitesi</h4>
+                        <span class="text-secondary" data-tr="Devam Ediyor" data-en="Present" data-es="Presente" data-de="Heute">Devam Ediyor</span>
+                    </div>
+                    <h6 class="text-secondary mb-0" data-tr="Lisans, Yönetim Bilişim Sistemleri (Uzaktan Eğitim)" data-en="Bachelor's, Management Information Systems (Distance)" data-es="Licenciatura, Sistemas de Información Gerencial (Distancia)" data-de="Bachelor, Wirtschaftsinformatik (Fernstudium)">Lisans, Yönetim Bilişim Sistemleri (Uzaktan Eğitim)</h6>
                 </div>
             </div>
         </div>
