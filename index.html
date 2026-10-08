@@ -66,12 +66,10 @@
             padding-top: 60px;
         }
         .hero-title { font-size: 3.5rem; font-weight: 700; margin-bottom: 10px; }
-        
-        /* Daktilo Yazısı */
         .hero-subtitle { font-size: 2.2rem; font-weight: 400; color: var(--text-secondary); margin-bottom: 30px; }
         .typed-text { color: var(--primary-color); font-weight: 600; }
         
-        /* Profil Fotoğrafı Stili */
+        /* Profil Fotoğrafı */
         .profile-img-container {
             position: relative;
             width: 300px;
@@ -105,7 +103,6 @@
             transform: translateY(-5px);
         }
 
-        /* Ortak Bölüm Stilleri */
         section { padding: 80px 0; }
         .section-title {
             font-size: 2rem;
@@ -124,33 +121,77 @@
             background-color: var(--primary-color);
         }
 
-        /* Kartlar ve Logo Stilleri */
+        /* Yeni Etkileşimli Kart Stilleri (Eğitim ve Deneyim İçin) */
         .custom-card {
             background-color: var(--card-bg);
             border: 1px solid var(--card-border);
             border-radius: 12px;
             padding: 30px;
             margin-bottom: 25px;
-            transition: transform 0.3s, box-shadow 0.3s;
+            transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
         }
-        .custom-card:hover {
+        .interactive-card {
+            cursor: pointer;
+            position: relative;
+        }
+        .interactive-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 10px 20px var(--hover-shadow);
             border-color: var(--primary-color);
         }
         .text-secondary { color: var(--text-secondary) !important; }
         
-        .edu-logo {
-            width: 70px;
-            height: 70px;
+        /* Yeni Logo ve Tarih Stilleri */
+        .large-logo {
+            width: 110px;
+            height: 110px;
             object-fit: contain;
-            background-color: #ffffff;
-            border-radius: 8px;
-            padding: 8px;
+            border-radius: 10px;
+            padding: 10px;
+            margin-bottom: 12px;
             border: 1px solid var(--card-border);
-            flex-shrink: 0;
+            background-color: #ffffff; /* Varsayılan beyaz zemin */
         }
-        
+        .logo-transparent {
+            background-color: transparent !important;
+            border: none !important;
+            padding: 0 !important;
+        }
+        .date-badge {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            font-weight: 600;
+            background: var(--bg-color);
+            border: 1px solid var(--card-border);
+            padding: 6px 12px;
+            border-radius: 20px;
+            display: inline-block;
+            white-space: nowrap;
+        }
+
+        /* Üzerine Gelince Çıkan Tıklama Detayı */
+        .hover-hint {
+            font-size: 0.9rem;
+            color: var(--primary-color);
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+            margin-top: 15px;
+            font-weight: 500;
+        }
+        .interactive-card:hover .hover-hint {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Detay İçeriği (Akordeon İçi) */
+        .collapse-content {
+            border-top: 1px dashed var(--card-border);
+            padding-top: 20px;
+            margin-top: 20px;
+            color: var(--text-color);
+        }
+
         /* Butonlar */
         .btn-custom {
             background-color: transparent;
@@ -182,7 +223,6 @@
     <!-- Üst Menü -->
     <nav class="navbar navbar-expand-lg fixed-top">
         <div class="container">
-            
             <div class="d-flex align-items-center">
                 <button class="btn btn-sm btn-custom me-2" onclick="toggleLanguage()" id="langBtn" title="Dili Değiştir">🇬🇧 EN</button>
                 <button class="btn btn-sm btn-custom" onclick="toggleTheme()" title="Temayı Değiştir"><i class="fas fa-sun" id="themeIcon"></i></button>
@@ -267,25 +307,43 @@
         <div class="container">
             <h2 class="section-title" data-tr="Eğitim" data-en="Education" data-es="Educación" data-de="Ausbildung">Eğitim</h2>
             
-            <div class="custom-card d-flex flex-column flex-md-row align-items-md-center gap-3">
-                <img src="izu-logo.png" alt="İZÜ Logo" class="edu-logo">
-                <div class="flex-grow-1">
-                    <div class="d-flex flex-column flex-md-row justify-content-md-between align-items-md-center mb-2">
-                        <h4 class="mb-1 mb-md-0 text-primary">İstanbul Sabahattin Zaim Üniversitesi</h4>
-                        <span class="text-secondary" data-tr="Devam Ediyor" data-en="Present" data-es="Presente" data-de="Heute">Devam Ediyor</span>
+            <!-- İZÜ Kartı -->
+            <div class="custom-card interactive-card" data-bs-toggle="collapse" data-bs-target="#edu1">
+                <div class="row align-items-center text-center text-md-start">
+                    <div class="col-md-3 d-flex flex-column align-items-center justify-content-center mb-3 mb-md-0 border-md-end border-secondary">
+                        <img src="izu-logo.png" alt="İZÜ Logo" class="large-logo">
+                        <div class="date-badge" data-tr="Eyl 2023 - Devam Ediyor" data-en="Sep 2023 - Present" data-es="Sep 2023 - Presente" data-de="Sep 2023 - Heute">Eyl 2023 - Devam Ediyor</div>
                     </div>
-                    <h6 class="text-secondary mb-0" data-tr="Lisans, Elektrik-Elektronik Mühendisliği" data-en="Bachelor's, Electrical-Electronics Engineering" data-es="Licenciatura, Ingeniería Eléctrica-Electrónica" data-de="Bachelor, Elektrotechnik-Elektronik">Lisans, Elektrik-Elektronik Mühendisliği</h6>
+                    <div class="col-md-9 ps-md-4">
+                        <h4 class="text-primary mb-1">İstanbul Sabahattin Zaim Üniversitesi</h4>
+                        <h6 class="text-secondary" data-tr="Lisans, Elektrik-Elektronik Mühendisliği" data-en="Bachelor's, Electrical-Electronics Engineering" data-es="Licenciatura, Ingeniería Eléctrica-Electrónica" data-de="Bachelor, Elektrotechnik-Elektronik">Lisans, Elektrik-Elektronik Mühendisliği</h6>
+                        <div class="hover-hint"><i class="fas fa-chevron-down"></i> <span data-tr="Detayları görmek için tıklayın" data-en="Click to view details" data-es="Haga clic para ver detalles" data-de="Klicken, um Details anzuzeigen">Detayları görmek için tıklayın</span></div>
+                    </div>
+                </div>
+                <div class="collapse" id="edu1">
+                    <div class="collapse-content">
+                        <p class="mb-0" data-tr="Bölümde aktif olarak IEEE RAS Öğrenci Kolu Başkanlığı ve su altı sistemleri üzerine teknik projeler yürütmekteyim." data-en="Actively leading the IEEE RAS Student Chapter and conducting technical projects on underwater systems." data-es="Liderando activamente la Rama Estudiantil de IEEE RAS y realizando proyectos técnicos sobre sistemas submarinos." data-de="Ich leite aktiv das IEEE RAS Student Chapter und führe technische Projekte zu Unterwassersystemen durch.">Bölümde aktif olarak IEEE RAS Öğrenci Kolu Başkanlığı ve su altı sistemleri üzerine teknik projeler yürütmekteyim.</p>
+                    </div>
                 </div>
             </div>
 
-            <div class="custom-card d-flex flex-column flex-md-row align-items-md-center gap-3">
-                <img src="iu-logo.png" alt="İÜ Logo" class="edu-logo">
-                <div class="flex-grow-1">
-                    <div class="d-flex flex-column flex-md-row justify-content-md-between align-items-md-center mb-2">
-                        <h4 class="mb-1 mb-md-0 text-primary">İstanbul Üniversitesi</h4>
-                        <span class="text-secondary" data-tr="Devam Ediyor" data-en="Present" data-es="Presente" data-de="Heute">Devam Ediyor</span>
+            <!-- İÜ Kartı -->
+            <div class="custom-card interactive-card" data-bs-toggle="collapse" data-bs-target="#edu2">
+                <div class="row align-items-center text-center text-md-start">
+                    <div class="col-md-3 d-flex flex-column align-items-center justify-content-center mb-3 mb-md-0 border-md-end border-secondary">
+                        <img src="iu-logo.png" alt="İÜ Logo" class="large-logo">
+                        <div class="date-badge" data-tr="Eyl 2024 - Devam Ediyor" data-en="Sep 2024 - Present" data-es="Sep 2024 - Presente" data-de="Sep 2024 - Heute">Eyl 2024 - Devam Ediyor</div>
                     </div>
-                    <h6 class="text-secondary mb-0" data-tr="Lisans, Yönetim Bilişim Sistemleri (Uzaktan Eğitim)" data-en="Bachelor's, Management Information Systems (Distance)" data-es="Licenciatura, Sistemas de Información Gerencial (Distancia)" data-de="Bachelor, Wirtschaftsinformatik (Fernstudium)">Lisans, Yönetim Bilişim Sistemleri (Uzaktan Eğitim)</h6>
+                    <div class="col-md-9 ps-md-4">
+                        <h4 class="text-primary mb-1">İstanbul Üniversitesi</h4>
+                        <h6 class="text-secondary" data-tr="Lisans, Yönetim Bilişim Sistemleri (Uzaktan Eğitim)" data-en="Bachelor's, Management Information Systems (Distance)" data-es="Licenciatura, Sistemas de Información Gerencial (Distancia)" data-de="Bachelor, Wirtschaftsinformatik (Fernstudium)">Lisans, Yönetim Bilişim Sistemleri (Uzaktan Eğitim)</h6>
+                        <div class="hover-hint"><i class="fas fa-chevron-down"></i> <span data-tr="Detayları görmek için tıklayın" data-en="Click to view details" data-es="Haga clic para ver detalles" data-de="Klicken, um Details anzuzeigen">Detayları görmek için tıklayın</span></div>
+                    </div>
+                </div>
+                <div class="collapse" id="edu2">
+                    <div class="collapse-content">
+                        <p class="mb-0" data-tr="İkinci lisans eğitimim kapsamında yazılım geliştirme, veri tabanı yönetimi ve web sistemleri (HTML/CSS/JS) üzerine akademik eğitim almaktayım." data-en="Receiving academic training on software development, database management, and web systems as part of my second major." data-es="Recibiendo formación académica sobre desarrollo de software, gestión de bases de datos y sistemas web como parte de mi segunda especialidad." data-de="Im Rahmen meines Zweitstudiums erhalte ich eine akademische Ausbildung in Softwareentwicklung, Datenbankmanagement und Websystemen.">İkinci lisans eğitimim kapsamında yazılım geliştirme, veri tabanı yönetimi ve web sistemleri (HTML/CSS/JS) üzerine akademik eğitim almaktayım.</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -296,27 +354,43 @@
         <div class="container">
             <h2 class="section-title" data-tr="Deneyim" data-en="Experience" data-es="Experiencia" data-de="Erfahrung">Deneyim</h2>
             
-            <div class="custom-card d-flex flex-column flex-md-row align-items-md-center gap-3">
-                <img src="t3-logo.png" alt="T3 Gemstone Logo" class="edu-logo" style="background-color: transparent; border: none; padding: 0;">
-                <div class="flex-grow-1">
-                    <div class="d-flex flex-column flex-md-row justify-content-md-between align-items-md-center mb-2">
-                        <h4 class="mb-1 mb-md-0 text-primary">T3 Gemstone</h4>
-                        <span class="text-secondary" data-tr="Mayıs 2026 - Devam Ediyor" data-en="May 2026 - Present" data-es="Mayo 2026 - Presente" data-de="Mai 2026 - Heute">Mayıs 2026 - Devam Ediyor</span>
+            <!-- T3 Kartı -->
+            <div class="custom-card interactive-card" data-bs-toggle="collapse" data-bs-target="#exp1">
+                <div class="row align-items-center text-center text-md-start">
+                    <div class="col-md-3 d-flex flex-column align-items-center justify-content-center mb-3 mb-md-0 border-md-end border-secondary">
+                        <img src="t3-logo.png" alt="T3 Gemstone Logo" class="large-logo logo-transparent">
+                        <div class="date-badge" data-tr="May 2026 - Devam Ediyor" data-en="May 2026 - Present" data-es="May 2026 - Presente" data-de="Mai 2026 - Heute">May 2026 - Devam Ediyor</div>
                     </div>
-                    <h6 class="text-secondary" data-tr="Gömülü Yazılım Stajyeri" data-en="Embedded Software Intern" data-es="Pasante de Software Integrado" data-de="Praktikantin für Embedded Software">Gömülü Yazılım Stajyeri</h6>
-                    <p class="mt-2 mb-0" data-tr="Buildroot ve ROS 2 mimarileri üzerine otonom sistem geliştirmeleri." data-en="Autonomous system development based on Buildroot and ROS 2 architectures." data-es="Desarrollo de sistemas autónomos basados en arquitecturas Buildroot y ROS 2." data-de="Entwicklung autonomer Systeme basierend auf Buildroot- und ROS 2-Architekturen.">Buildroot ve ROS 2 mimarileri üzerine otonom sistem geliştirmeleri.</p>
+                    <div class="col-md-9 ps-md-4">
+                        <h4 class="text-primary mb-1">T3 Gemstone</h4>
+                        <h6 class="text-secondary" data-tr="Gömülü Yazılım Stajyeri" data-en="Embedded Software Intern" data-es="Pasante de Software Integrado" data-de="Praktikantin für Embedded Software">Gömülü Yazılım Stajyeri</h6>
+                        <div class="hover-hint"><i class="fas fa-chevron-down"></i> <span data-tr="Detayları görmek için tıklayın" data-en="Click to view details" data-es="Haga clic para ver detalles" data-de="Klicken, um Details anzuzeigen">Detayları görmek için tıklayın</span></div>
+                    </div>
+                </div>
+                <div class="collapse" id="exp1">
+                    <div class="collapse-content">
+                        <p class="mb-0" data-tr="Buildroot ve ROS 2 mimarileri üzerine otonom sistem geliştirmeleri yapmaktayım. Donanım seviyesinde gömülü Linux sistemlerinin entegrasyonu üzerine çalışıyorum." data-en="Developing autonomous systems based on Buildroot and ROS 2 architectures. Working on embedded Linux system integration." data-es="Desarrollo de sistemas autónomos basados en arquitecturas Buildroot y ROS 2. Trabajo en integración de sistemas Linux integrados." data-de="Entwicklung autonomer Systeme basierend auf Buildroot- und ROS 2-Architekturen. Ich arbeite an der Integration eingebetteter Linux-Systeme.">Buildroot ve ROS 2 mimarileri üzerine otonom sistem geliştirmeleri yapmaktayım. Donanım seviyesinde gömülü Linux sistemlerinin entegrasyonu üzerine çalışıyorum.</p>
+                    </div>
                 </div>
             </div>
 
-            <div class="custom-card d-flex flex-column flex-md-row align-items-md-center gap-3">
-                <img src="nar-logo.png" alt="İZÜ NAR Logo" class="edu-logo">
-                <div class="flex-grow-1">
-                    <div class="d-flex flex-column flex-md-row justify-content-md-between align-items-md-center mb-2">
-                        <h4 class="mb-1 mb-md-0 text-primary">İZÜ NAR</h4>
-                        <span class="text-secondary" data-tr="Temmuz 2025 - Devam Ediyor" data-en="July 2025 - Present" data-es="Julio 2025 - Presente" data-de="Juli 2025 - Heute">Temmuz 2025 - Devam Ediyor</span>
+            <!-- İZÜ NAR Kartı -->
+            <div class="custom-card interactive-card" data-bs-toggle="collapse" data-bs-target="#exp2">
+                <div class="row align-items-center text-center text-md-start">
+                    <div class="col-md-3 d-flex flex-column align-items-center justify-content-center mb-3 mb-md-0 border-md-end border-secondary">
+                        <img src="nar-logo.png" alt="İZÜ NAR Logo" class="large-logo">
+                        <div class="date-badge" data-tr="Tem 2025 - Devam Ediyor" data-en="Jul 2025 - Present" data-es="Jul 2025 - Presente" data-de="Jul 2025 - Heute">Tem 2025 - Devam Ediyor</div>
                     </div>
-                    <h6 class="text-secondary" data-tr="Yarı Zamanlı Araştırmacı" data-en="Part-Time Researcher" data-es="Investigadora a tiempo parcial" data-de="Teilzeit-Forscherin">Yarı Zamanlı Araştırmacı</h6>
-                    <p class="mt-2 mb-0" data-tr="Nükleer algılayıcılar ve robotik uygulama araştırma merkezinde mühendislik projeleri yönetimi." data-en="Engineering projects management at the nuclear sensors and robotics application research center." data-es="Gestión de proyectos de ingeniería en el centro de investigación de aplicaciones de sensores nucleares y robótica." data-de="Leitung von Ingenieurprojekten im Forschungszentrum für Nuklearsensoren und Robotikanwendungen.">Nükleer algılayıcılar ve robotik uygulama araştırma merkezinde mühendislik projeleri yönetimi.</p>
+                    <div class="col-md-9 ps-md-4">
+                        <h4 class="text-primary mb-1">İZÜ NAR</h4>
+                        <h6 class="text-secondary" data-tr="Yarı Zamanlı Araştırmacı" data-en="Part-Time Researcher" data-es="Investigadora a tiempo parcial" data-de="Teilzeit-Forscherin">Yarı Zamanlı Araştırmacı</h6>
+                        <div class="hover-hint"><i class="fas fa-chevron-down"></i> <span data-tr="Detayları görmek için tıklayın" data-en="Click to view details" data-es="Haga clic para ver detalles" data-de="Klicken, um Details anzuzeigen">Detayları görmek için tıklayın</span></div>
+                    </div>
+                </div>
+                <div class="collapse" id="exp2">
+                    <div class="collapse-content">
+                        <p class="mb-0" data-tr="Nükleer Algılayıcılar ve Robotik Uygulama Araştırma Merkezi'nde mühendislik projeleri süreç yönetimi, elektronik kart tasarımı ve AR-GE destek süreçlerinde görev almaktayım." data-en="Involved in engineering projects process management, electronic board design, and R&D support processes at the Nuclear Sensors and Robotics Center." data-es="Participo en la gestión de procesos de proyectos de ingeniería, diseño de placas electrónicas y procesos de apoyo de I+D en el Centro de Robótica." data-de="Beteiligt an der Prozesssteuerung von Ingenieurprojekten, dem Entwurf von Elektronikplatinen und F&E-Unterstützungsprozessen im Robotikzentrum.">Nükleer Algılayıcılar ve Robotik Uygulama Araştırma Merkezi'nde mühendislik projeleri süreç yönetimi, elektronik kart tasarımı ve AR-GE destek süreçlerinde görev almaktayım.</p>
+                    </div>
                 </div>
             </div>
         </div>
